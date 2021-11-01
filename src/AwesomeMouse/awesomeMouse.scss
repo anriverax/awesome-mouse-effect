@@ -1,8 +1,5 @@
 .mouse {
 	transition: all 0.2s;
-	&:hover {
-		cursor: none;
-	}
 	.cursor {
 		position: fixed;
 		width: 35px;
