@@ -1,3 +1,3 @@
 import AwesomeMouse from './AwesomeMouse';
 
-export { AwesomeMouse };
+export default AwesomeMouse;
