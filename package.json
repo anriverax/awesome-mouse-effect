@@ -1,7 +1,6 @@
 {
 	"name": "@anibal-rivera/awesome-mouse-effect",
-	"version": "0.1.0",
-	"private": false,
+	"version": "1.0.0",
 	"author": "Anibal Rivera",
 	"main": "build/index.js",
 	"license": "MIT",
