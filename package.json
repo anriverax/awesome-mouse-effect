@@ -1,6 +1,6 @@
 {
 	"name": "@anibal-rivera/awesome-mouse-effect",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"private": false,
 	"author": "Anibal Rivera",
 	"main": "build/index.js",
@@ -10,7 +10,6 @@
 	],
 	"dependencies": {},
 	"devDependencies": {
-    
 		"postcss": "^8.3.11",
 		"@rollup/plugin-commonjs": "^21.0.1",
 		"@rollup/plugin-node-resolve": "^13.0.6",
@@ -50,8 +49,4 @@
 	"engines": {
 		"node": ">=14"
 	},
-	"publishConfig": {
-		"access": "public",
-		"registry": "https://registry.npmjs.org/"
-	}
 }
