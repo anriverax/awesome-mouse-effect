@@ -1,0 +1,57 @@
+{
+	"name": "@anibal-rivera/awesome-mouse-effect",
+	"version": "1.0.0",
+	"private": false,
+	"author": "Anibal Rivera",
+	"main": "build/index.js",
+	"license": "MIT",
+	"files": [
+		"build"
+	],
+	"dependencies": {},
+	"devDependencies": {
+    
+		"postcss": "^8.3.11",
+		"@rollup/plugin-commonjs": "^21.0.1",
+		"@rollup/plugin-node-resolve": "^13.0.6",
+		"@types/node": "^12.0.0",
+		"@types/react": "^17.0.0",
+		"@types/react-dom": "^17.0.0",
+		"classnames": "^2.3.1",
+		"node-sass": "^6.0.1",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-scripts": "4.0.3",
+		"rollup": "^2.58.3",
+		"rollup-plugin-peer-deps-external": "^2.2.4",
+		"rollup-plugin-postcss": "^4.0.1",
+		"rollup-plugin-typescript2": "^0.30.0",
+		"typescript": "^4.1.2"
+	},
+	"peerDependencies": {
+		"classnames": ">=2.3.1",
+		"react": ">=17.0.2",
+		"react-dom": ">=17.0.2"
+	},
+	"scripts": {
+		"build": "rollup -c",
+		"prepublishOnly": "npm run build",
+		"start": "react-scripts start",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"keywords": [
+		"component",
+		"design",
+		"mouse",
+		"cursor",
+		"react"
+	],
+	"engines": {
+		"node": ">=14"
+	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	}
+}
