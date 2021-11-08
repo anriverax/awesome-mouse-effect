@@ -1,6 +1,6 @@
 {
 	"name": "@anrivera/react-awesome-mouse-effect",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"author": "Anibal Rivera",
 	"main": "build/index.js",
 	"license": "MIT",

@@ -5,16 +5,20 @@ import './awesomeMouse.scss';
 
 type Props = {
 	children: React.ReactChild | React.ReactChild[];
+	color: string;
 };
 
-const AwesomeMouse = ({ children }: Props) => {
+const AwesomeMouse = ({ children, color }: Props) => {
+	const mouseRef = useRef<any>();
 	const cursorRef = useRef<any>();
+	const pointerRef = useRef<any>();
 
-	const [pointer, setPointer] = useState({ x: 0, y: 0 });
-	const [outer, setOuter] = useState({ x: 0, y: 0 });
+	const [pointer, setPointer] = useState<any>({ x: 0, y: 0 });
+	const [outer, setOuter] = useState<any>({ x: 0, y: 0 });
 	const [styleCursor, setStyleCursor] = useState<any>();
 	const [stylePointer, setStylePointer] = useState<any>();
 	const [stopFlag, setStopFlag] = useState<boolean>(true);
+	const [isActive, setIsActive] = useState<boolean>(false);
 
 	const mousemove = (e: any) => {
 		setStopFlag(false);
@@ -29,28 +33,80 @@ const AwesomeMouse = ({ children }: Props) => {
 
 	useEffect(() => {
 		const moveCursorDom = () => {
-			if (!stopFlag) {
+			if (!isActive) {
 				setStyleCursor({
 					transform: `matrix(1, 0, 0, 1, ${outer.x}, ${outer.y})`,
-					width: '30px',
-					height: '30px',
+					border: `1px solid ${color}`,
+					opacity: 1,
 				});
 
 				setStylePointer({
 					transform: `matrix(1, 0, 0, 1, ${pointer.x}, ${pointer.y}) translate3d(-50%, -50%, 0)`,
+					backgroundColor: `${color}`,
+					opacity: 1,
 				});
 
-				cursorRef.current = requestAnimationFrame(moveCursorDom);
+				mouseRef.current = requestAnimationFrame(moveCursorDom);
+			} else {
+				setStyleCursor({
+					transform: `matrix(1, 0, 0, 1, ${outer.x}, ${outer.y}) scale(3)`,
+					backgroundColor: `${color}`,
+					opacity: 0.2,
+				});
+
+				mouseRef.current = requestAnimationFrame(moveCursorDom);
 			}
 		};
-		cursorRef.current = requestAnimationFrame(moveCursorDom);
-		return () => cancelAnimationFrame(cursorRef.current);
-	}, [pointer, outer, stopFlag]);
+		mouseRef.current = requestAnimationFrame(moveCursorDom);
+		return () => cancelAnimationFrame(mouseRef.current);
+	}, [pointer, outer, isActive, color]);
+
+	useEffect(() => {
+		const element = document.querySelectorAll('a');
+
+		element.forEach((el) => {
+			el.addEventListener('mouseover', () => {
+				setIsActive(true);
+			});
+			el.addEventListener('click', () => {
+				setIsActive(true);
+			});
+			el.addEventListener('mouseup', () => {
+				setIsActive(true);
+			});
+			el.addEventListener('mouseout', () => {
+				setIsActive(false);
+			});
+		});
+
+		return () => {
+			element.forEach((el) => {
+				el.removeEventListener('mouseover', () => {
+					setIsActive(true);
+				});
+				el.removeEventListener('click', () => {
+					setIsActive(true);
+				});
+				el.removeEventListener('mouseup', () => {
+					setIsActive(true);
+				});
+				el.removeEventListener('mouseout', () => {
+					setIsActive(false);
+				});
+			});
+		};
+	}, [isActive]);
 
 	return (
-		<div className='mouse' onMouseMove={mousemove}>
-			<div className={classNames({ cursor: !stopFlag })} style={styleCursor}></div>
-			<div className={classNames({ pointer: !stopFlag })} style={stylePointer}></div>
+		<div className='magicCursor' onMouseMove={mousemove}>
+			<div
+				ref={cursorRef}
+				className={classNames('mouse', { cursor: !stopFlag })}
+				style={styleCursor}></div>
+			<div
+				ref={pointerRef}
+				className={classNames('mouse', { magicPointer: !stopFlag })}
+				style={stylePointer}></div>
 			{children}
 		</div>
 	);
